@@ -90,9 +90,9 @@ void    Edge::Draw(Int4  i) const
     Move(M);
     char VertexDraw_i10[20];
     if (i<0)
-      sprintf(VertexDraw_i10,"%p",this);
-    else 
-      sprintf(VertexDraw_i10,"%ld",i);
+      snprintf(VertexDraw_i10,20,"%p",this);
+    else
+      snprintf(VertexDraw_i10,20,"%ld",i);
     if (i>=0)
       plotstring(&VertexDraw_i10[0]); 
     
@@ -143,8 +143,8 @@ void  Triangle::Draw(Int4 i ) const
 	i = CurrentTh->Number(this);
     }	
   char i10[20];
-  if (i<0)   sprintf(i10,"%p",this);
-  else  sprintf(i10,"%ld",i);
+  if (i<0)   snprintf(i10,20,"%p",this);
+  else  snprintf(i10,20,"%ld",i);
   showgraphic();
 
   if (ns[0] == 0) {
@@ -746,9 +746,9 @@ void GeometricalEdge::Draw(Int4  i)
       char VertexDraw_i10[20];
       if( k50) {
 	if (i<0)
-	  sprintf(VertexDraw_i10,"Eg%p",this);
-	else 
-	  sprintf(VertexDraw_i10,"Eg%ld",i);
+	  snprintf(VertexDraw_i10,20,"Eg%p",this);
+	else
+	  snprintf(VertexDraw_i10,"Eg%ld",i);
 	rmoveto(x50.x,x50.y);
 	plotstring(&VertexDraw_i10[0]); }  
 
@@ -795,7 +795,7 @@ void   Geometry::Draw() const {
   for (i=0;i<nbv;i++)
     if (vertices[i].Required()) {
       char i10[40];
-      sprintf(i10,"%ld:%d",i,vertices[i].Required());
+      snprintf(i10,40,"%ld:%d",i,vertices[i].Required());
       Move(vertices[i].r);
       if(vertices[i].Corner()) couleur(2);
       plotstring(i10);  

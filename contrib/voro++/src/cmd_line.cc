@@ -406,18 +406,18 @@ int main(int argc,char **argv) {
 
 	// Open files for output
 	char *buffer=new char[flen+7];
-	sprintf(buffer,"%s.vol",argv[i+6]);
+	snprintf(buffer,flen+7,"%s.vol",argv[i+6]);
 	FILE *outfile=safe_fopen(buffer,"w"),*gnu_file,*povp_file,*povv_file;
 	if(gnuplot_output) {
-		sprintf(buffer,"%s.gnu",argv[i+6]);
+		snprintf(buffer,flen+7,"%s.gnu",argv[i+6]);
 		gnu_file=safe_fopen(buffer,"w");
 	} else gnu_file=NULL;
 	if(povp_output) {
-		sprintf(buffer,"%s_p.pov",argv[i+6]);
+		snprintf(buffer,flen+7,"%s_p.pov",argv[i+6]);
 		povp_file=safe_fopen(buffer,"w");
 	} else povp_file=NULL;
 	if(povv_output) {
-		sprintf(buffer,"%s_v.pov",argv[i+6]);
+		snprintf(buffer,flen+7,"%s_v.pov",argv[i+6]);
 		povv_file=safe_fopen(buffer,"w");
 	} else povv_file=NULL;
 	delete [] buffer;

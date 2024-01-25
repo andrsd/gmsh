@@ -46,7 +46,7 @@ int main() {
 			con.put(j,x,y,z,r);
 		}
 
-		sprintf(buf,"rad_test_out/fr%d.pov",i);
+		snprintf(buf,128,"rad_test_out/fr%d.pov",i);
 //		FILE *pf=safe_fopen(buf,"w");
 		j=0;
 		c_loop_all cl(con);

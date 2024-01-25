@@ -84,7 +84,7 @@ void draw_polygon(FILE *fp,vector<int> &f_vert,vector<double> &v,int j) {
 	// Create POV-Ray vector strings for each of the vertices
 	for(k=0;k<n;k++) {
 		l=3*f_vert[j+k+1];
-		sprintf(s[k],"<%g,%g,%g>",v[l],v[l+1],v[l+2]);
+		snprintf(s[k],128,"<%g,%g,%g>",v[l],v[l+1],v[l+2]);
 	}
 
 	// Draw the interior of the polygon
