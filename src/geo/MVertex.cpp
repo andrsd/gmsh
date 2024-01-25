@@ -210,7 +210,7 @@ void MVertex::writeUNV(FILE *fp, bool officialExponentFormat,
   if(officialExponentFormat) {
     // hack to print the numbers with "D+XX" exponents
     char tmp[128];
-    snprintf(tmp, 256, "%25.16E%25.16E%25.16E\n", x() * scalingFactor,
+    snprintf(tmp, 128, "%25.16E%25.16E%25.16E\n", x() * scalingFactor,
              y() * scalingFactor, z() * scalingFactor);
     for(std::size_t i = 0; i < strlen(tmp); i++)
       if(tmp[i] == 'E') tmp[i] = 'D';
@@ -308,17 +308,17 @@ void MVertex::writeNEU(FILE *fp, int dim, double scalingFactor)
 static void double_to_char8(double val, char *str)
 {
   if(val >= 1.e6)
-    sprintf(str, "%.2E", val);
+    snprintf(str, 8, "%.2E", val);
   else if(val >= 1.e-3)
-    sprintf(str, "%f", val);
+    snprintf(str, 8, "%f", val);
   else if(val >= 0)
-    sprintf(str, "%.2E", val);
+    snprintf(str, 8, "%.2E", val);
   else if(val >= -1.e-3)
-    sprintf(str, "%.1E", val);
+    snprintf(str, 8, "%.1E", val);
   else if(val >= -1.e6)
-    sprintf(str, "%f", val);
+    snprintf(str, 8, "%f", val);
   else
-    sprintf(str, "%.1E", val);
+    snprintf(str, 8, "%.1E", val);
 
 #if defined(WIN32)
   // Windows uses 3 digits in the exponent (which apparently does not

@@ -6735,7 +6735,7 @@ StringIndex :
     tSTRING '~' '{' FExpr '}'
     {
       char tmpstr[256];
-      sprintf(tmpstr, "_%d", (int)$4);
+      snprintf(tmpstr, 256, "_%d", (int)$4);
       $$ = (char *)Malloc((strlen($1)+strlen(tmpstr) + 1) * sizeof(char));
       strcpy($$, $1); strcat($$, tmpstr);
       Free($1);
@@ -6743,7 +6743,7 @@ StringIndex :
   | StringIndex '~' '{' FExpr '}'
     {
       char tmpstr[256];
-      sprintf(tmpstr, "_%d", (int)$4);
+      snprintf(tmpstr, 256, "_%d", (int)$4);
       $$ = (char *)Malloc((strlen($1)+strlen(tmpstr) + 1) * sizeof(char)) ;
       strcpy($$, $1) ; strcat($$, tmpstr) ;
       Free($1);
@@ -6751,7 +6751,7 @@ StringIndex :
   | tStringToName '[' StringExprVar ']' '~' '{' FExpr '}'
     {
       char tmpstr[256];
-      sprintf(tmpstr, "_%d", (int)$7);
+      snprintf(tmpstr, 256, "_%d", (int)$7);
       $$ = (char *)Malloc((strlen($3)+strlen(tmpstr) + 1) * sizeof(char));
       strcpy($$, $3); strcat($$, tmpstr);
       Free($3);
@@ -6880,7 +6880,7 @@ int printListOfDouble(const char *format, List_T *list, std::string &buffer)
       double d;
       List_Read(list, i, &d);
       char tmp[256];
-      sprintf(tmp, " [%d]%g", i, d);
+      snprintf(tmp, 256, " [%d]%g", i, d);
       buffer += tmp;
     }
     return 0;
@@ -6904,7 +6904,7 @@ int printListOfDouble(const char *format, List_T *list, std::string &buffer)
       if(k != j){
 	strncpy(tmp1, &(format[k]), j-k);
 	tmp1[j-k] = '\0';
-	sprintf(tmp2, tmp1, *(double*)List_Pointer(list, i));
+	snprintf(tmp2, 256, tmp1, *(double*)List_Pointer(list, i));
 	buffer += tmp2;
       }
     }
@@ -7059,7 +7059,7 @@ void yymsg(int level, const char *fmt, ...)
   char tmp[1024];
 
   va_start(args, fmt);
-  vsprintf(tmp, fmt, args);
+  vsnprintf(tmp, 1024, fmt, args);
   va_end(args);
 
   if(level == 0){

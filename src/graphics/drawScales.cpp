@@ -350,7 +350,7 @@ void drawContext::drawScales()
       }
       // compute width
       width_prev = width;
-      snprintf(label, 1204, opt->format.c_str(), -M_PI * 1.e-4);
+      snprintf(label, 1024, opt->format.c_str(), -M_PI * 1.e-4);
       width = bar_size + tic + drawContext::global()->getStringWidth(label);
       if(opt->showTime) {
         char tmp[256];
