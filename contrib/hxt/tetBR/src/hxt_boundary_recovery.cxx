@@ -118,7 +118,7 @@ int tetgenmesh::reconstructmesh(void *p, double tol){
   in = new tetgenio();
   b = new tetgenbehavior();
   char opts[128];
-  sprintf(opts, "YpeQT%gp/%g", tol, tol);
+  snprintf(opts, 128, "YpeQT%gp/%g", tol, tol);
   //sprintf(opts, "YpeQT%gp/%g", CTX::instance()->mesh.toleranceInitialDelaunay,
   //        CTX::instance()->mesh.angleToleranceFacetOverlap);
 

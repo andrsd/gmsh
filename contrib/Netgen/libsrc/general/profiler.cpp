@@ -51,7 +51,7 @@ namespace netgen
 #ifdef PARALLEL
 	sprintf (filename, "netgen.prof.%d", id);
 #else
-	sprintf (filename, "netgen.prof");
+	snprintf (filename, 100, "netgen.prof");
 #endif
 	
 	if (id == 0) printf ("write profile to file netgen.prof\n"); 

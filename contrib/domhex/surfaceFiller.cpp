@@ -426,9 +426,9 @@ void packingOfParallelograms(GFace *gf, std::vector<MVertex *> &packed,
   FILE *f2 = NULL;
   if(Msg::GetVerbosity() == 99) {
     char ccc[256];
-    sprintf(ccc, "points%d.pos", gf->tag());
+    snprintf(ccc, 256, "points%d.pos", gf->tag());
     f = Fopen(ccc, "w");
-    sprintf(ccc, "e_points%d.pos", gf->tag());
+    snprintf(ccc, 256, "e_points%d.pos", gf->tag());
     f2 = Fopen(ccc, "w");
     if(f) fprintf(f, "View \"\"{\n");
     if(f2) fprintf(f2, "View \"\"{\n");

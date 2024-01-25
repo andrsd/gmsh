@@ -6667,7 +6667,7 @@ void Recombinator_Graph::export_hexmesh_so_far(int &file)
   stringstream ssinit;
   ss << "hex_mesh_temp";
   char chose[256];
-  sprintf(chose, "_%0*d", 6, file);
+  snprintf(chose, 256, "_%0*d", 6, file);
   ss << chose;
   ss << ".msh";
   ofstream out(ss.str().c_str());
@@ -6686,7 +6686,7 @@ void Recombinator_Graph::export_all_hex(int &file, GRegion *gr)
   ssinit << "hex_progression_initdegree";
   //  ss << file;
   char chose[256];
-  sprintf(chose, "_%0*d", 6, file);
+  snprintf(chose, 256, "_%0*d", 6, file);
   ss << chose;
   ss << ".pos";
   ssinit << chose;
@@ -6833,7 +6833,7 @@ void Recombinator_Graph::export_direct_neighbor_table(int max)
     stringstream ss2;
     ss2 << "neighbors_table_hex";
     char chose[256];
-    sprintf(chose, "_%0*d", 2, counter);
+    snprintf(chose, 256, "_%0*d", 2, counter);
     ss2 << chose;
     ss2 << ".pos";
     ofstream out2(ss2.str().c_str());
