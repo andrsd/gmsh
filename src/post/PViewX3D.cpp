@@ -410,11 +410,11 @@ bool PView::writeX3D(const std::string &fileName)
           width = bar_size + tic + 10. * font_size * 3 / 4;
           if(opt->showTime) {
             char tmp[256];
-            sprintf(tmp, opt->format.c_str(), data->getTime(opt->timeStep));
-            sprintf(label, "%s (%s)", data->getName().c_str(), tmp);
+            snprintf(tmp, 256, opt->format.c_str(), data->getTime(opt->timeStep));
+            snprintf(label, 1024, "%s (%s)", data->getName().c_str(), tmp);
           }
           else {
-            sprintf(label, "%s", data->getName().c_str());
+            snprintf(label, 1024, "%s", data->getName().c_str());
           }
           width = max(width, strlen(label) * font_size * 3 / 4);
           if(i % 2)
@@ -761,7 +761,7 @@ static void writeX3DScaleValues(FILE *fp, PView *p, double xmin, double ymin,
   double maxw = 0.;
   for(int i = 0; i < nbv + 1; i++) {
     double v = opt->getScaleValue(i, nbv + 1, opt->tmpMin, opt->tmpMax);
-    sprintf(label, opt->format.c_str(), v);
+    snprintf(label, 1024, opt->format.c_str(), v);
     maxw = max(maxw, strlen(label) * font_size * 3. / 4.);
   }
   double f = (opt->intervalsType == PViewOptions::Discrete ||
@@ -792,7 +792,7 @@ static void writeX3DScaleValues(FILE *fp, PView *p, double xmin, double ymin,
      opt->intervalsType == PViewOptions::Continuous) {
     for(int i = 0; i < nbv + 1; i++) {
       double v = opt->getScaleValue(i, nbv + 1, opt->tmpMin, opt->tmpMax);
-      sprintf(label, opt->format.c_str(), v);
+      snprintf(label, 1024, opt->format.c_str(), v);
       if(horizontal) {
         writeX3DStringCenter(fp, label, xmin + i * vbox, ymin + height + tic,
                              0., font_h);
@@ -810,7 +810,7 @@ static void writeX3DScaleValues(FILE *fp, PView *p, double xmin, double ymin,
     }
     for(int i = 0; i < nbv; i++) {
       double v = opt->getScaleValue(i, nbv, opt->tmpMin, opt->tmpMax);
-      sprintf(label, opt->format.c_str(), v);
+      snprintf(label, 1024, opt->format.c_str(), v);
       if(horizontal) {
         writeX3DStringCenter(fp, label, xmin + box / 2. + i * vbox,
                              ymin + height + tic, 0., font_h);
@@ -843,15 +843,15 @@ static void writeX3DScaleLabel(FILE *fp, PView *p, double xmin, double ymin,
   int nt = data->getNumTimeSteps();
   if((opt->showTime == 1 && nt > 1) || opt->showTime == 2) {
     char tmp[256];
-    sprintf(tmp, opt->format.c_str(), data->getTime(opt->timeStep));
-    sprintf(label, "%s (%s)", data->getName().c_str(), tmp);
+    snprintf(tmp, 256, opt->format.c_str(), data->getTime(opt->timeStep));
+    snprintf(label, 1024, "%s (%s)", data->getName().c_str(), tmp);
   }
   else if((opt->showTime == 3 && nt > 1) || opt->showTime == 4) {
-    sprintf(label, "%s (%d/%d)", data->getName().c_str(), opt->timeStep,
-            data->getNumTimeSteps() - 1);
+    snprintf(label, 1024, "%s (%d/%d)", data->getName().c_str(), opt->timeStep,
+             data->getNumTimeSteps() - 1);
   }
   else
-    sprintf(label, "%s", data->getName().c_str());
+    snprintf(label, 1024, "%s", data->getName().c_str());
   if(horizontal) {
     writeX3DStringCenter(fp, label, xmin + width / 2.,
                          ymin + height + tic + .9 * font_h, 0., font_h);

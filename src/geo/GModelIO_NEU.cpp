@@ -333,7 +333,7 @@ int GModel::writeNEU(const std::string &name, bool saveAll,
     std::string volumeName = getPhysicalName(3, it->first);
     if(volumeName.empty()) {
       char tmp[256];
-      sprintf(tmp, "Material group %d", it->first);
+      snprintf(tmp, 256, "Material group %d", it->first);
       volumeName = tmp;
     }
     fprintf(fp, "%32s\n", volumeName.c_str());
@@ -356,7 +356,7 @@ int GModel::writeNEU(const std::string &name, bool saveAll,
         std::string regionName = getPhysicalName(2, it->first);
         if(regionName.empty()) {
           char tmp[256];
-          sprintf(tmp, "PhysicalSurface%d", it->first);
+          snprintf(tmp, 256, "PhysicalSurface%d", it->first);
           regionName = tmp;
         }
 

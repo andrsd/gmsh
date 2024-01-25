@@ -374,7 +374,7 @@ std::vector<std::string> GetBuildInfo()
 #if defined(HAVE_FLTK)
   {
     char tmp[256];
-    sprintf(tmp, "%d.%d.%d", FL_MAJOR_VERSION, FL_MINOR_VERSION,
+    snprintf(tmp, 256, "%d.%d.%d", FL_MAJOR_VERSION, FL_MINOR_VERSION,
             FL_PATCH_VERSION);
     s.push_back(std::string("FLTK version  : ") + tmp);
   }
@@ -382,7 +382,7 @@ std::vector<std::string> GetBuildInfo()
 #if defined(HAVE_PETSC)
   {
     char tmp[256];
-    sprintf(tmp, "%d.%d.%d (%s arithmtic)", PETSC_VERSION_MAJOR,
+    snprintf(tmp, 256, "%d.%d.%d (%s arithmtic)", PETSC_VERSION_MAJOR,
             PETSC_VERSION_MINOR, PETSC_VERSION_SUBMINOR,
 #if defined(PETSC_USE_COMPLEX)
             "complex"
@@ -396,7 +396,7 @@ std::vector<std::string> GetBuildInfo()
 #if defined(HAVE_OCC)
   {
     char tmp[256];
-    sprintf(tmp, "%d.%d.%d", OCC_VERSION_MAJOR, OCC_VERSION_MINOR,
+    snprintf(tmp, 256, "%d.%d.%d", OCC_VERSION_MAJOR, OCC_VERSION_MINOR,
             OCC_VERSION_MAINTENANCE);
     s.push_back(std::string("OCC version   : ") + tmp);
   }
@@ -404,7 +404,7 @@ std::vector<std::string> GetBuildInfo()
 #if defined(HAVE_MED)
   {
     char tmp[256];
-    sprintf(tmp, "%d.%d.%d", MED_NUM_MAJEUR, MED_NUM_MINEUR, MED_NUM_RELEASE);
+    snprintf(tmp, 256, "%d.%d.%d", MED_NUM_MAJEUR, MED_NUM_MINEUR, MED_NUM_RELEASE);
     s.push_back(std::string("MED version   : ") + tmp);
   }
 #endif

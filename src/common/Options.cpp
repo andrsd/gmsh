@@ -128,9 +128,9 @@ static void PrintStringOptions(int num, int level, int diff, int help,
     if((s[i].level & level) && !(s[i].level & GMSH_DEPRECATED)) {
       if(!diff || s[i].function(num, GMSH_GET, "") != s[i].def) {
         char tmp[1024];
-        sprintf(tmp, "%s%s = \"%s\";%s%s", prefix, s[i].str,
-                s[i].function(num, GMSH_GET, "").c_str(), help ? " // " : "",
-                help ? s[i].help : "");
+        snprintf(tmp, 1024, "%s%s = \"%s\";%s%s", prefix, s[i].str,
+                 s[i].function(num, GMSH_GET, "").c_str(), help ? " // " : "",
+                 help ? s[i].help : "");
         if(file)
           fprintf(file, "%s\n", tmp);
         else {
@@ -251,9 +251,9 @@ static void PrintNumberOptions(int num, int level, int diff, int help,
   while(s[i].str) {
     if((s[i].level & level) && !(s[i].level & GMSH_DEPRECATED)) {
       if(!diff || (s[i].function(num, GMSH_GET, 0) != s[i].def)) {
-        sprintf(tmp, "%s%s = %.16g;%s%s", prefix, s[i].str,
-                s[i].function(num, GMSH_GET, 0), help ? " // " : "",
-                help ? s[i].help : "");
+        snprintf(tmp, 1024, "%s%s = %.16g;%s%s", prefix, s[i].str,
+                 s[i].function(num, GMSH_GET, 0), help ? " // " : "",
+                 help ? s[i].help : "");
         if(file)
           fprintf(file, "%s\n", tmp);
         else if(vec)
@@ -432,11 +432,11 @@ static void PrintColorOptions(int num, int level, int diff, int help,
         break;
       }
       if(!diff || (s[i].function(num, GMSH_GET, 0) != def)) {
-        sprintf(tmp, "%sColor.%s = {%d,%d,%d};%s%s", prefix, s[i].str,
-                CTX::instance()->unpackRed(s[i].function(num, GMSH_GET, 0)),
-                CTX::instance()->unpackGreen(s[i].function(num, GMSH_GET, 0)),
-                CTX::instance()->unpackBlue(s[i].function(num, GMSH_GET, 0)),
-                help ? " // " : "", help ? s[i].help : "");
+        snprintf(tmp, 1024, "%sColor.%s = {%d,%d,%d};%s%s", prefix, s[i].str,
+                 CTX::instance()->unpackRed(s[i].function(num, GMSH_GET, 0)),
+                 CTX::instance()->unpackGreen(s[i].function(num, GMSH_GET, 0)),
+                 CTX::instance()->unpackBlue(s[i].function(num, GMSH_GET, 0)),
+                 help ? " // " : "", help ? s[i].help : "");
         if(file)
           fprintf(file, "%s\n", tmp);
         else if(vec)
@@ -604,7 +604,7 @@ static void PrintColorTable(int num, int diff, const char *prefix, FILE *file,
   }
 
   char tmp[1024];
-  sprintf(tmp, "%s = {", prefix);
+  snprintf(tmp, 1024, "%s = {", prefix);
   if(file)
     fprintf(file, "%s\n", tmp);
   else if(vec)
@@ -612,7 +612,7 @@ static void PrintColorTable(int num, int diff, const char *prefix, FILE *file,
   else
     Msg::Direct(tmp);
   ColorTable_Print(&opt->colorTable, file, vec);
-  sprintf(tmp, "};");
+  snprintf(tmp, 1024, "};");
   if(file)
     fprintf(file, "%s\n", tmp);
   else if(vec)
@@ -746,7 +746,7 @@ void PrintOptions(int num, int level, int diff, int help, const char *filename,
 #if defined(HAVE_POST)
     for(std::size_t i = 0; i < PView::list.size(); i++) {
       char tmp[256];
-      sprintf(tmp, "View[%lu].", i);
+      snprintf(tmp, 256, "View[%lu].", i);
       PrintOptionCategory(level, diff, help, "View options (strings)", file,
                           vec);
       PrintStringOptions(i, level, diff, help, ViewOptions_String, tmp, file,

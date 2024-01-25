@@ -741,13 +741,13 @@ int openglWindow::handle(int event)
         }
         else if(points.size()) {
           char tmp[256];
-          sprintf(tmp, "Point (%g, %g)", points[0].x(), points[0].y());
+          snprintf(tmp, 256, "Point (%g, %g)", points[0].x(), points[0].y());
           text = tmp;
           cmd = CTX::instance()->post.doubleClickedGraphPointCommand;
         }
         else if(views.size()) {
           char tmp[256];
-          sprintf(tmp, "View[%d]", views[0]->getIndex());
+          snprintf(tmp, 256, "View[%d]", views[0]->getIndex());
           text = tmp;
           cmd = views[0]->getOptions()->doubleClickedCommand;
         }

@@ -247,134 +247,134 @@ void statisticsWindow::compute(bool elementQuality)
 #endif
 
   // geom
-  sprintf(label[num], "%g", s[0]);
+  snprintf(label[num], 256, "%g", s[0]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[1]);
+  snprintf(label[num], 256, "%g", s[1]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[2]);
+  snprintf(label[num], 256, "%g", s[2]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[3]);
+  snprintf(label[num], 256, "%g", s[3]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[45]);
+  snprintf(label[num], 256, "%g", s[45]);
   value[num]->value(label[num]);
   num++;
 
   // mesh
-  sprintf(label[num], "%g", s[4]);
+  snprintf(label[num], 256, "%g", s[4]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[5]);
+  snprintf(label[num], 256, "%g", s[5]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[6]);
+  snprintf(label[num], 256, "%g", s[6]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[7]);
+  snprintf(label[num], 256, "%g", s[7]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[8]);
+  snprintf(label[num], 256, "%g", s[8]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[9]);
+  snprintf(label[num], 256, "%g", s[9]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[10]);
+  snprintf(label[num], 256, "%g", s[10]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[11]);
+  snprintf(label[num], 256, "%g", s[11]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[12]);
+  snprintf(label[num], 256, "%g", s[12]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[13]);
+  snprintf(label[num], 256, "%g", s[13]);
   value[num]->value(label[num]);
   num++;
 
-  sprintf(label[num], "%g", s[14]);
+  snprintf(label[num], 256, "%g", s[14]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[15]);
+  snprintf(label[num], 256, "%g", s[15]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[16]);
+  snprintf(label[num], 256, "%g", s[16]);
   value[num]->value(label[num]);
   num++;
 
   if(!elementQuality) {
     for(int i = 0; i < 6; i += 2) butt[i]->deactivate();
-    sprintf(label[num], "Press Update");
+    snprintf(label[num], 256, "Press Update");
     value[num]->deactivate();
     value[num]->value(label[num]);
     num++;
-    sprintf(label[num], "Press Update");
+    snprintf(label[num], 256, "Press Update");
     value[num]->deactivate();
     value[num]->value(label[num]);
     num++;
-    sprintf(label[num], "Press Update");
+    snprintf(label[num], 256, "Press Update");
     value[num]->deactivate();
     value[num]->value(label[num]);
     num++;
   }
   else {
     for(int i = 0; i < 6; i += 2) butt[i]->activate();
-    sprintf(label[num], "%.4g (%.4g->%.4g)", s[18], s[19], s[20]);
+    snprintf(label[num], 256, "%.4g (%.4g->%.4g)", s[18], s[19], s[20]);
     value[num]->activate();
     value[num]->value(label[num]);
     num++;
-    sprintf(label[num], "%.4g (%.4g->%.4g)", s[21], s[22], s[23]);
+    snprintf(label[num], 256, "%.4g (%.4g->%.4g)", s[21], s[22], s[23]);
     value[num]->activate();
     value[num]->value(label[num]);
     num++;
-    sprintf(label[num], "%.4g (%.4g->%.4g)", s[24], s[25], s[26]);
+    snprintf(label[num], 256, "%.4g (%.4g->%.4g)", s[24], s[25], s[26]);
     value[num]->activate();
     value[num]->value(label[num]);
     num++;
   }
 
   // post
-  sprintf(label[num], "%g", s[27]);
+  snprintf(label[num], 256, "%g", s[27]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[28]);
+  snprintf(label[num], 256, "%g", s[28]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[29]);
+  snprintf(label[num], 256, "%g", s[29]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[30]);
+  snprintf(label[num], 256, "%g", s[30]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[31]);
+  snprintf(label[num], 256, "%g", s[31]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[32]);
+  snprintf(label[num], 256, "%g", s[32]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[33]);
+  snprintf(label[num], 256, "%g", s[33]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[34]);
+  snprintf(label[num], 256, "%g", s[34]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[35]);
+  snprintf(label[num], 256, "%g", s[35]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[36]);
+  snprintf(label[num], 256, "%g", s[36]);
   value[num]->value(label[num]);
   num++;
-  sprintf(label[num], "%g", s[37]);
+  snprintf(label[num], 256, "%g", s[37]);
   value[num]->value(label[num]);
   num++;
 
   static char mem[256];
   std::size_t m = GetMemoryUsage();
   if(m) {
-    sprintf(mem, "Memory usage: %gMb", m / 1024. / 1024.);
+    snprintf(mem, 256, "Memory usage: %gMb", m / 1024. / 1024.);
     memUsage->label(mem);
   }
 }

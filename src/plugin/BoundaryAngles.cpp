@@ -176,9 +176,9 @@ PView *GMSH_BoundaryAnglesPlugin::execute(PView *v)
     // viewname and filename (=outputdir/viewname.pos)
     char viewname[500];
     char filename[500];
-    sprintf(viewname, "%s_%d", rootname.c_str(), gf->tag());
-    sprintf(filename, "%s%s_%d.pos", outputdir.c_str(), rootname.c_str(),
-            gf->tag());
+    snprintf(viewname, 500, "%s_%d", rootname.c_str(), gf->tag());
+    snprintf(filename, 500, "%s%s_%d.pos", outputdir.c_str(), rootname.c_str(),
+             gf->tag());
     data->Time.push_back(0.);
     data->setName(viewname);
     data->setFileName(filename);

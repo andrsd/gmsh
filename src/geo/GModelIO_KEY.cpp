@@ -19,11 +19,11 @@ static std::string physicalName(GModel *m, int dim, int num)
   std::string name = m->getPhysicalName(dim, num);
   if(name.empty()) {
     char tmp[256];
-    sprintf(tmp, "%s%d",
-            (dim == 3) ? "PhysicalVolume" :
-            (dim == 2) ? "PhysicalSurface" :
-                         "PhysicalLine",
-            num);
+    snprintf(tmp, 256, "%s%d",
+             (dim == 3) ? "PhysicalVolume" :
+             (dim == 2) ? "PhysicalSurface" :
+                          "PhysicalLine",
+             num);
     name = tmp;
   }
   for(std::size_t i = 0; i < name.size(); i++)

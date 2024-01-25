@@ -773,7 +773,7 @@ void CreateOutputFile(const std::string &fileName, int format,
       std::vector<std::string> frames;
       for(int i = 0; i < numSteps; i += CTX::instance()->post.animStep){
         char tmp[256];
-        sprintf(tmp, ".gmsh-%06d.ppm", (int)frames.size());
+        snprintf(tmp, 256, ".gmsh-%06d.ppm", (int)frames.size());
         frames.push_back(tmp);
       }
       if(cycle != 2)

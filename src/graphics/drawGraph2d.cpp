@@ -277,12 +277,12 @@ static void drawGraphAxes(drawContext *ctx, PView *p, double xleft, double ytop,
     int nt = data->getNumTimeSteps();
     if((opt->showTime == 1 && nt > 1) || opt->showTime == 2) {
       char tmp[256];
-      sprintf(tmp, opt->format.c_str(), data->getTime(opt->timeStep));
+      snprintf(tmp, 256, opt->format.c_str(), data->getTime(opt->timeStep));
       label += std::string(" (") + tmp + ")";
     }
     else if((opt->showTime == 3 && nt > 1) || opt->showTime == 4) {
       char tmp[256];
-      sprintf(tmp, "%d", opt->timeStep);
+      snprintf(tmp, 256, "%d", opt->timeStep);
       label += std::string(" (") + tmp + ")";
     }
   }
@@ -332,7 +332,7 @@ static void drawGraphAxes(drawContext *ctx, PView *p, double xleft, double ytop,
       }
       if(opt->showScale) {
         char tmp[256];
-        sprintf(tmp, opt->format.c_str(),
+        snprintf(tmp, 256, opt->format.c_str(),
                 (i == nb) ? opt->tmpMin : (opt->tmpMax - i * dv));
         if(!overlay) {
           ctx->drawStringRight(tmp, xleft - 2 * tic,
@@ -350,7 +350,7 @@ static void drawGraphAxes(drawContext *ctx, PView *p, double xleft, double ytop,
   if(opt->axesTics[0] > 0) {
     int nb = opt->axesTics[0];
     char tmp[256];
-    sprintf(tmp, opt->axesFormat[0].c_str(), -M_PI * 1.e4);
+    snprintf(tmp, 256, opt->axesFormat[0].c_str(), -M_PI * 1.e4);
     double ww = drawContext::global()->getStringWidth(tmp);
     if(inModelCoordinates) ww *= ctx->pixel_equiv_x / ctx->s[0];
     if((nb - 1) * ww > width) nb = (int)(width / ww) + 1;
@@ -385,10 +385,10 @@ static void drawGraphAxes(drawContext *ctx, PView *p, double xleft, double ytop,
       if(opt->showScale) {
         char tmp[256];
         if(nb == 1)
-          sprintf(tmp, opt->axesFormat[0].c_str(), xmin);
+          snprintf(tmp, 256, opt->axesFormat[0].c_str(), xmin);
         else
-          sprintf(tmp, opt->axesFormat[0].c_str(),
-                  xmin + i * (xmax - xmin) / (double)(nb - 1));
+          snprintf(tmp, 256, opt->axesFormat[0].c_str(),
+                   xmin + i * (xmax - xmin) / (double)(nb - 1));
         ctx->drawStringCenter(tmp, xleft + i * dx,
                               ybot - font_h - tic - overlay * (font_h + tic),
                               0.);
@@ -447,7 +447,7 @@ static void addGraphPoint(drawContext *ctx, PView *p, double xleft, double ytop,
       double offset = 3;
       if(inModelCoordinates) offset *= ctx->pixel_equiv_x / ctx->s[0];
       char label[256];
-      sprintf(label, opt->format.c_str(), y);
+      snprintf(label, 256, opt->format.c_str(), y);
       ctx->drawString(label, px + offset, py + offset, 0.);
     }
     else if(singlePoint && (opt->pointType == 1 || opt->pointType == 3)) {
@@ -591,7 +591,7 @@ void drawContext::drawGraph2d(bool inModelCoordinates)
   char label[1024];
   for(std::size_t i = 0; i < graphs.size(); i++) {
     PViewOptions *opt = graphs[i]->getOptions();
-    sprintf(label, opt->format.c_str(), -M_PI * 1.e4);
+    snprintf(label, 1024, opt->format.c_str(), -M_PI * 1.e4);
     xsep = std::max(xsep, drawContext::global()->getStringWidth(label));
   }
   xsep += tic;

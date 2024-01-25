@@ -325,9 +325,9 @@ public:
   {
     char tmp[256];
 #if !defined(WIN32) || defined(__CYGWIN__)
-    sprintf(tmp, "%d", getpid());
+    snprintf(tmp, 256, "%d", getpid());
 #else
-    sprintf(tmp, "%d", _getpid());
+    snprintf(tmp, 256, "%d", _getpid());
 #endif
     SendString(GMSH_START, tmp);
   }
@@ -411,14 +411,14 @@ public:
         _portno = ntohs(addr_in.sin_port);
         int pos = (int)_sockname.find(':'); // remove trailing ' ' or '0'
         char tmp[256];
-        sprintf(tmp, "%s:%d", _sockname.substr(0, pos).c_str(), _portno);
+        snprintf(tmp, 256, "%s:%d", _sockname.substr(0, pos).c_str(), _portno);
         _sockname.assign(tmp);
       }
     }
 
     if(exe.size() || args.size()) {
       char s[1024];
-      sprintf(s, args.c_str(), _sockname.c_str());
+      snprintf(s, 1024, args.c_str(), _sockname.c_str());
       NonBlockingSystemCall(exe, s); // starts the solver
     }
     else {

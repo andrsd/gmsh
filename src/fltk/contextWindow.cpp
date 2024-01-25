@@ -1061,7 +1061,7 @@ void elementaryContextWindow::updatePoint(double pt[3], int which)
   for(int i = 0; i < 3; i++) {
     if(!frozenPointCoord(i)) {
       char str[32];
-      sprintf(str, "%g", pt[i]);
+      snprintf(str, 32, "%g", pt[i]);
       if(which == 1) {
         int start[11] = {4, 8, 14, 21, 26, 32, 39, 47, 53, 59, 68};
         for(int k = 0; k < 11; k++) {

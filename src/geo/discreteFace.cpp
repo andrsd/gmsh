@@ -416,7 +416,7 @@ void discreteFace::secondDer(const SPoint2 &param, SVector3 &dudu,
 void discreteFace::_debugParametrization(bool uv)
 {
   char tmp[256];
-  sprintf(tmp, "discrete_param_%d.pos", tag());
+  snprintf(tmp, 256, "discrete_param_%d.pos", tag());
   FILE *fp = fopen(tmp, "w");
   if(fp) {
     fprintf(fp, "View \"uv\" {\n");
@@ -453,7 +453,7 @@ void intrinsicDelaunayize(discreteFace *df)
 #if defined(HAVE_EIGEN) && defined(HAVE_GEOMETRYCENTRAL)
 
   char name[245];
-  sprintf(name, "intrinsic%d.pos", df->tag());
+  snprintf(name, 245, "intrinsic%d.pos", df->tag());
   FILE *ff = fopen(name, "w");
   fprintf(ff, "View \"\"{\n");
 

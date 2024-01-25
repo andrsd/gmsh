@@ -457,7 +457,7 @@ std::string Msg::PrintResources(bool printDate, bool printWallTime,
   std::string pwall = "";
   if(printWallTime){
     char tmp[128];
-    sprintf(tmp, "Wall %gs", TimeOfDay() - _startTime);
+    snprintf(tmp, 128, "Wall %gs", TimeOfDay() - _startTime);
     pwall = tmp;
     if(printCpu || (printMem && mem))
       pwall += ", ";
@@ -466,7 +466,7 @@ std::string Msg::PrintResources(bool printDate, bool printWallTime,
   std::string pcpu = "";
   if(printCpu){
     char tmp[128];
-    sprintf(tmp, "CPU %gs", Cpu());
+    snprintf(tmp, 128, "CPU %gs", Cpu());
     pcpu = tmp;
     if(printMem && mem)
       pcpu += ", ";
@@ -475,7 +475,7 @@ std::string Msg::PrintResources(bool printDate, bool printWallTime,
   std::string pmem = "";
   if(mem && printMem){
     char tmp[128];
-    sprintf(tmp, "Mem %gMb", (double)mem / 1024. / 1024.);
+    snprintf(tmp, 128, "Mem %gMb", (double)mem / 1024. / 1024.);
     pmem = tmp;
   }
 
@@ -813,7 +813,7 @@ void Msg::ProgressMeter(int n, bool log, const char *fmt, ...)
     vsnprintf(str, sizeof(str), fmt, args);
     va_end(args);
     int l = strlen(str); if(str[l - 1] == '\n') str[l - 1] = '\0';
-    sprintf(str2, "Info    : [%3d%%] %s", p, str);
+    snprintf(str2, 5100, "Info    : [%3d%%] %s", p, str);
 
     if(_client) _client->Progress(str2);
 
@@ -841,7 +841,7 @@ void Msg::PrintTimers()
       it != _timers.end(); it++){
     if(it != _timers.begin()) str += ", ";
     char tmp[256];
-    sprintf(tmp, "%s = %gs ", it->first.c_str(), it->second);
+    snprintf(tmp, 256, "%s = %gs ", it->first.c_str(), it->second);
     str += std::string(tmp);
   }
   if(!str.size()) return;
@@ -873,8 +873,8 @@ void Msg::PrintErrorCounter(const char *title)
   std::string help("Check the full log for details");
   std::string line(std::max(strlen(title), help.size()), '-');
   char warn[128], err[128];
-  sprintf(warn, "%5d warning%s", GetWarningCount(), GetWarningCount() == 1 ? "" : "s");
-  sprintf(err, "%5d error%s", GetErrorCount(), GetErrorCount() == 1 ? "" : "s");
+  snprintf(warn, 128, "%5d warning%s", GetWarningCount(), GetWarningCount() == 1 ? "" : "s");
+  snprintf(err, 128, "%5d error%s", GetErrorCount(), GetErrorCount() == 1 ? "" : "s");
 
 #if defined(HAVE_FLTK)
   if(FlGui::available()){
@@ -914,7 +914,7 @@ double Msg::GetValue(const char *text, double defaultval)
 #if defined(HAVE_FLTK)
   if(FlGui::available()){
     char defaultstr[256];
-    sprintf(defaultstr, "%.16g", defaultval);
+    snprintf(defaultstr, 256, "%.16g", defaultval);
     const char *ret = fl_input(text, defaultstr, "");
     if(!ret)
       return defaultval;
@@ -1564,11 +1564,11 @@ void Msg::ImportPhysicalGroupsInOnelab()
         std::string name = GModel::current()->getPhysicalName(dim, it->first);
         char tmp[256];
         if(name.empty()){
-          sprintf(tmp, "Physical %s %d", (dim == 3) ? "Volume" : (dim == 2) ? "Surface" :
-                  (dim == 1) ? "Curve" : "Point", num);
+          snprintf(tmp, 256, "Physical %s %d", (dim == 3) ? "Volume" : (dim == 2) ? "Surface" :
+                   (dim == 1) ? "Curve" : "Point", num);
           name = tmp;
         }
-        sprintf(tmp, "Gmsh/Physical group %d/", index);
+        snprintf(tmp, 256, "Gmsh/Physical group %d/", index);
         std::string str = tmp;
         onelab::number n1(str + "Dimension", dim);
         n1.setReadOnly(true);
@@ -1592,11 +1592,11 @@ void Msg::ImportPhysicalGroupsInOnelab()
     // remove old ones
     for(int index = size + 1; index < oldsize + 1; index++){
       char tmp[256];
-      sprintf(tmp, "Gmsh/Physical group %d/Dimension", index);
+      snprintf(tmp, 256, "Gmsh/Physical group %d/Dimension", index);
       _onelabClient->clear(tmp);
-      sprintf(tmp, "Gmsh/Physical group %d/Number", index);
+      snprintf(tmp, 256, "Gmsh/Physical group %d/Number", index);
       _onelabClient->clear(tmp);
-      sprintf(tmp, "Gmsh/Physical group %d/Name", index);
+      snprintf(tmp, 256, "Gmsh/Physical group %d/Name", index);
       _onelabClient->clear(tmp);
     }
 

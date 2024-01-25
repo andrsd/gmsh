@@ -223,16 +223,16 @@ static std::string stringValue(int numComp, double d[9], double norm,
 {
   char label[100];
   if(numComp == 1)
-    sprintf(label, format, d[0]);
+    snprintf(label, 100, format, d[0]);
   else if(numComp == 3) {
     char str[3][32];
-    sprintf(str[0], format, d[0]);
-    sprintf(str[1], format, d[1]);
-    sprintf(str[2], format, d[2]);
-    sprintf(label, "(%s,%s,%s)", str[0], str[1], str[2]);
+    snprintf(str[0], 32, format, d[0]);
+    snprintf(str[1], 32, format, d[1]);
+    snprintf(str[2], 32, format, d[2]);
+    snprintf(label, 100, "(%s,%s,%s)", str[0], str[1], str[2]);
   }
   else if(numComp == 9)
-    sprintf(label, format, norm);
+    snprintf(label, 100, format, norm);
   return std::string(label);
 }
 

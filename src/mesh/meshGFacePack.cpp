@@ -974,9 +974,9 @@ int computePointsUsingScaledCrossFieldPlanarP2(
 
   {
     char name[256];
-    sprintf(name, "polyMeshCurved%d.pos", 200);
+    snprintf(name, 256, "polyMeshCurved%d.pos", 200);
     FILE *f = fopen(name, "w");
-    sprintf(name, "polyMeshCurved%d.pos", 300);
+    snprintf(name, 256, "polyMeshCurved%d.pos", 300);
     FILE *f2 = fopen(name, "w");
     fprintf(f, "View \" %s \"{\n", name);
     fprintf(f2, "View \" %s \"{\n", name);

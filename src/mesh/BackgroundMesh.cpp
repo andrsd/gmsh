@@ -432,9 +432,9 @@ void backgroundMesh::propagateCrossField(GFace *_gf)
   // printf("converged in %d iterations\n", ITER);
 #if 0
   char name[256];
-  sprintf(name, "cross-%d-%d.pos", _gf->tag(), ITER);
+  snprintf(name, 256, "cross-%d-%d.pos", _gf->tag(), ITER);
   print(name, 0, 1);
-  sprintf(name, "smooth-%d-%d.pos", _gf->tag(), ITER);
+  snprintf(name, 256, "smooth-%d-%d.pos", _gf->tag(), ITER);
   print(name, _gf, 2);
 #endif
 }

@@ -616,7 +616,7 @@ PView *GMSH_LevelsetPlugin::execute(PView *v)
         }
       }
       char tmp[246];
-      sprintf(tmp, "_Levelset_%d", step);
+      snprintf(tmp, 246, "_Levelset_%d", step);
       out->setName(vdata->getName() + tmp);
       out->setFileName(vdata->getFileName() + tmp + ".pos");
       out->finalize();

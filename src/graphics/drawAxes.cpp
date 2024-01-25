@@ -54,7 +54,7 @@ static int drawTics(drawContext *ctx, int comp, double n, std::string &format,
   drawContext::global()->setFont(CTX::instance()->glFontEnum,
                                  CTX::instance()->glFontSize);
   char tmp[256];
-  sprintf(tmp, format.c_str(), -M_PI * 1.e4);
+  snprintf(tmp, 256, format.c_str(), -M_PI * 1.e4);
   double win1[3], win2[3];
   ctx->world2Viewport(p1, win1);
   ctx->world2Viewport(p2, win2);
@@ -91,9 +91,9 @@ static int drawTics(drawContext *ctx, int comp, double n, std::string &format,
 
     // draw tic labels
     if(comp < 0) // display the length value (ruler-mode, starting at 0)
-      sprintf(tmp, format.c_str(), value_d);
+      snprintf(tmp, 256, format.c_str(), value_d);
     else // display the coordinate value
-      sprintf(tmp, format.c_str(), value_p[comp]);
+      snprintf(tmp, 256, format.c_str(), value_p[comp]);
     double winp[3], winr[3];
     ctx->world2Viewport(p, winp);
     ctx->world2Viewport(r, winr);

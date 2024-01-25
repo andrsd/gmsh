@@ -701,8 +701,8 @@ namespace onelabUtils {
     tm *t = localtime(&now);
     char stamp[73];
     // stamp.size() is always 20
-    sprintf(stamp, "_%04d-%02d-%02d_%02d-%02d-%02d", 1900 + t->tm_year,
-            1 + t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+    snprintf(stamp, 73, "_%04d-%02d-%02d_%02d-%02d-%02d", 1900 + t->tm_year,
+             1 + t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
     return std::string(stamp);
   }
 

@@ -1485,9 +1485,9 @@ void buildBackgroundMesh(GFace *gf, bool crossFieldClosestPoint,
       backgroundMesh::set(gf); // will solve PDE
     if(Msg::GetVerbosity() == 99) {
       char name[256];
-      sprintf(name, "bgm-%d.pos", gf->tag());
+      snprintf(name, 256, "bgm-%d.pos", gf->tag());
       backgroundMesh::current()->print(name, gf);
-      sprintf(name, "cross-%d.pos", gf->tag());
+      snprintf(name, 256, "cross-%d.pos", gf->tag());
       backgroundMesh::current()->print(name, gf, 1);
     }
     gf->triangles = TR;

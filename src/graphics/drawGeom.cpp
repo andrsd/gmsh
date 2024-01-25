@@ -30,14 +30,14 @@ static void drawEntityLabel(drawContext *ctx, GEntity *e, double x, double y,
 
   char str[1024];
   if(CTX::instance()->geom.labelType == 1) {
-    sprintf(str, "%d", e->tag());
+    snprintf(str, 1024, "%d", e->tag());
   }
   else if(CTX::instance()->geom.labelType == 2) {
     strcpy(str, "");
     for(std::size_t i = 0; i < e->physicals.size(); i++) {
       char tmp[32];
       if(i) strcat(str, ", ");
-      sprintf(tmp, "%d", e->physicals[i]);
+      snprintf(tmp, 32, "%d", e->physicals[i]);
       strcat(str, tmp);
     }
   }

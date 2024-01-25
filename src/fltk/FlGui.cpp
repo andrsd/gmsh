@@ -1276,7 +1276,7 @@ void FlGui::setStatus(const std::string &msg, bool opengl)
     if((ne || nw) && graph[0]->getMessageHeight() < FL_NORMAL_SIZE) {
       tmp += "  -  ";
       char n[128];
-      sprintf(n, "%d", ne ? ne : nw);
+      snprintf(n, 128, "%d", ne ? ne : nw);
       tmp += n;
       tmp += (ne > 1) ? " Errors" :
              ne       ? " Error" :

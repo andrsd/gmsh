@@ -288,7 +288,7 @@ viewButton::viewButton(int x, int y, int w, int h, int num, Fl_Color col)
   _toggle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP);
   _toggle->value(opt->visible);
   char tmp[256];
-  sprintf(tmp, "[%d] %s", num, data->getName().c_str());
+  snprintf(tmp, 256"[%d] %s", num, data->getName().c_str());
   _toggle->copy_label(tmp);
   strcpy(_tooltip, data->getFileName().c_str());
   _toggle->tooltip(_tooltip);

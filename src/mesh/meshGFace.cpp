@@ -68,7 +68,7 @@ static void trueBoundary(GFace *gf, std::vector<SPoint2> &bnd, int debug)
   FILE *view_t = nullptr;
   if(debug) {
     char name[245];
-    sprintf(name, "trueBoundary%d.pos", gf->tag());
+    snprintf(name, 245, "trueBoundary%d.pos", gf->tag());
     view_t = Fopen(name, "w");
     if(view_t) fprintf(view_t, "View \"True Boundary\"{\n");
   }
@@ -1415,7 +1415,7 @@ static bool meshGenerator(GFace *gf, int RECUR_ITER,
   FILE *fdeb = nullptr;
   if(debug && RECUR_ITER == 0) {
     char name[245];
-    sprintf(name, "surface%d-boundary-real.pos", gf->tag());
+    snprintf(name, 245, "surface%d-boundary-real.pos", gf->tag());
     fdeb = fopen(name, "w");
     fprintf(fdeb, "View \"\"{\n");
   }
@@ -1656,9 +1656,9 @@ static bool meshGenerator(GFace *gf, int RECUR_ITER,
 
   if(debug && RECUR_ITER == 0) {
     char name[245];
-    sprintf(name, "surface%d-initial-real.pos", gf->tag());
+    snprintf(name, 245, "surface%d-initial-real.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "surface%d-initial-param.pos", gf->tag());
+    snprintf(name, 245, "surface%d-initial-param.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 
@@ -1716,8 +1716,8 @@ static bool meshGenerator(GFace *gf, int RECUR_ITER,
     }
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-not_yet_recovered-real-%d.msh", gf->tag(),
-              RECUR_ITER);
+      snprintf(name, 245, "surface%d-not_yet_recovered-real-%d.msh", gf->tag(),
+               RECUR_ITER);
       gf->model()->writeMSH(name);
     }
 
@@ -1883,9 +1883,9 @@ static bool meshGenerator(GFace *gf, int RECUR_ITER,
 
   if(debug) {
     char name[245];
-    sprintf(name, "surface%d-recovered-real.pos", gf->tag());
+    snprintf(name, 245, "surface%d-recovered-real.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "surface%d-recovered-param.pos", gf->tag());
+    snprintf(name, 245, "surface%d-recovered-param.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 
@@ -1989,9 +1989,9 @@ static bool meshGenerator(GFace *gf, int RECUR_ITER,
     // sprintf(name, "trueBoundary%d.pos", gf->tag());
     // std::vector<SPoint2> bnd;
     // trueBoundary(name, gf,bnd);
-    sprintf(name, "real%d.pos", gf->tag());
+    snprintf(name, 256, "real%d.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "param%d.pos", gf->tag());
+    snprintf(name, 256, "param%d.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 
@@ -2657,9 +2657,9 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
 
   if(debug) {
     char name[245];
-    sprintf(name, "surface%d-initial-real.pos", gf->tag());
+    snprintf(name, 245, "surface%d-initial-real.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "surface%d-initial-param.pos", gf->tag());
+    snprintf(name, 245, "surface%d-initial-param.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 
@@ -2773,11 +2773,11 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
     // getchar();
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-initial-real-afterITER%d.pos", gf->tag(),
-              RECUR_ITER);
+      snprintf(name, 245, "surface%d-initial-real-afterITER%d.pos", gf->tag(),
+               RECUR_ITER);
       outputScalarField(m->triangles, name, 0, gf);
-      sprintf(name, "surface%d-initial-param-afterITER%d.pos", gf->tag(),
-              RECUR_ITER);
+      snprintf(name, 245, "surface%d-initial-param-afterITER%d.pos", gf->tag(),
+               RECUR_ITER);
       outputScalarField(m->triangles, name, 1, gf);
     }
     delete m;
@@ -2882,9 +2882,9 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
 
   if(debug) {
     char name[245];
-    sprintf(name, "surface%d-recovered-real.pos", gf->tag());
+    snprintf(name, 245, "surface%d-recovered-real.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "surface%d-recovered-param.pos", gf->tag());
+    snprintf(name, 245, "surface%d-recovered-param.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 
@@ -2906,32 +2906,32 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
                   &recoverMap, &true_boundary);
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-phase1-real.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase1-real.pos", gf->tag());
       outputScalarField(m->triangles, name, 0, gf);
-      sprintf(name, "surface%d-phase1-param.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase1-param.pos", gf->tag());
       outputScalarField(m->triangles, name, 1, gf);
     }
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-phase2-real.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase2-real.pos", gf->tag());
       outputScalarField(m->triangles, name, 0, gf);
-      sprintf(name, "surface%d-phase2-param.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase2-param.pos", gf->tag());
       outputScalarField(m->triangles, name, 1, gf);
     }
     refineMeshBDS(gf, *m, -CTX::instance()->mesh.refineSteps, false, nullptr,
                   &recoverMap, &true_boundary);
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-phase3-real.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase3-real.pos", gf->tag());
       outputScalarField(m->triangles, name, 0);
-      sprintf(name, "surface%d-phase3-param.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase3-param.pos", gf->tag());
       outputScalarField(m->triangles, name, 1, gf);
     }
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-phase4-real.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase4-real.pos", gf->tag());
       outputScalarField(m->triangles, name, 0);
-      sprintf(name, "surface%d-phase4-param.pos", gf->tag());
+      snprintf(name, 245, "surface%d-phase4-param.pos", gf->tag());
       outputScalarField(m->triangles, name, 1, gf);
     }
 
@@ -2950,7 +2950,7 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
 
     if(debug) {
       char name[245];
-      sprintf(name, "surface%d-just-real.pos", gf->tag());
+      snprintf(name, 245, "surface%d-just-real.pos", gf->tag());
       outputScalarField(m->triangles, name, 0, gf);
     }
   }
@@ -3005,9 +3005,9 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
 
   if(debug) {
     char name[245];
-    sprintf(name, "surface%d-final-real.pos", gf->tag());
+    snprintf(name, 245, "surface%d-final-real.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "surface%d-final-param.pos", gf->tag());
+    snprintf(name, 245, "surface%d-final-param.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 
@@ -3064,9 +3064,9 @@ static bool meshGeneratorPeriodic(GFace *gf, int RECUR_ITER,
 
   if(debug) {
     char name[256];
-    sprintf(name, "real%d.pos", gf->tag());
+    snprintf(name, 256, "real%d.pos", gf->tag());
     outputScalarField(m->triangles, name, 0, gf);
-    sprintf(name, "param%d.pos", gf->tag());
+    snprintf(name, 256, "param%d.pos", gf->tag());
     outputScalarField(m->triangles, name, 1, gf);
   }
 

@@ -166,7 +166,7 @@ public:
   {
     for(int i = 0; i < 100; i++) {
       char name[256];
-      sprintf(name, "%s%02d", _prefix.c_str(), i);
+      snprintf(name, 256, "%s%02d", _prefix.c_str(), i);
       if(i < browser->size())
         prefs.set(name, browser->text(i + 1));
       else if(prefs.entryExists(name))
@@ -190,7 +190,7 @@ public:
     browser->clear();
     for(int i = 0; i < 100; i++) {
       char name[256], value[1024];
-      sprintf(name, "%s%02d", _prefix.c_str(), i);
+      snprintf(name, 256, "%s%02d", _prefix.c_str(), i);
       if(prefs.entryExists(name)) {
         prefs.get(name, value, "", sizeof(value));
         browser->add(value);
@@ -318,7 +318,7 @@ public:
     input_choice->clear();
     char text[128];
     while(order < 5 && order <= order_max && order_max < 10 && order_max > 0) {
-      sprintf(text, "%d", order);
+      snprintf(text, 128, "%d", order);
       input_choice->add(text);
       order *= 2;
     }

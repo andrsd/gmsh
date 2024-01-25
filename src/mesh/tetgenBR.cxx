@@ -591,7 +591,7 @@ bool tetgenbehavior::parse_commandline(int argc, char **argv)
     workstring[increment] = '%';
     workstring[increment + 1] = 'd';
     workstring[increment + 2] = '\0';
-    sprintf(outfilename, workstring, meshnumber + 1);
+    snprintf(outfilename, 1024, workstring, meshnumber + 1);
   }
   // Additional input file name has the end ".a".
   strcpy(addinfilename, infilename);

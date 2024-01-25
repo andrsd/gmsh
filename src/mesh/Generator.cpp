@@ -109,7 +109,7 @@ public:
     }
     if(edges.size()) {
       char name[256];
-      sprintf(name, "missingEdgesOnRegion%d.pos", gr->tag());
+      snprintf(name, 256, "missingEdgesOnRegion%d.pos", gr->tag());
       Msg::Warning("Region %d : %d mesh edges that should be embedded are "
                    "missing in the final mesh",
                    gr->tag(), (int)edges.size());
@@ -128,7 +128,7 @@ public:
     }
     if(faces.size()) {
       char name[256];
-      sprintf(name, "missingFacesOnRegion%d.pos", gr->tag());
+      snprintf(name, 256, "missingFacesOnRegion%d.pos", gr->tag());
       Msg::Warning("Volume %d : %d mesh faces that should be embedded are "
                    "missing in the final mesh",
                    gr->tag(), (int)faces.size());

@@ -1418,8 +1418,8 @@ void SetOrderN(GModel *m, int order, bool linear, bool incomplete,
   int nPts = order - 1;
 
   char msg[256];
-  sprintf(msg, "Meshing order %d (curvilinear %s)...", order,
-          linear ? "off" : "on");
+  snprintf(msg, 256, "Meshing order %d (curvilinear %s)...", order,
+           linear ? "off" : "on");
 
   Msg::StatusBar(true, msg);
 

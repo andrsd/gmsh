@@ -210,8 +210,8 @@ void MVertex::writeUNV(FILE *fp, bool officialExponentFormat,
   if(officialExponentFormat) {
     // hack to print the numbers with "D+XX" exponents
     char tmp[128];
-    sprintf(tmp, "%25.16E%25.16E%25.16E\n", x() * scalingFactor,
-            y() * scalingFactor, z() * scalingFactor);
+    snprintf(tmp, 256, "%25.16E%25.16E%25.16E\n", x() * scalingFactor,
+             y() * scalingFactor, z() * scalingFactor);
     for(std::size_t i = 0; i < strlen(tmp); i++)
       if(tmp[i] == 'E') tmp[i] = 'D';
     fprintf(fp, "%s", tmp);

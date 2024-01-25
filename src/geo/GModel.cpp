@@ -1386,7 +1386,7 @@ int GModel::adaptMesh(std::vector<int> technique,
       nbElems = getNumMeshElements();
 
       char name[256];
-      sprintf(name, "meshAdapt-%d.msh", ITER);
+      snprintf(name, 256, "meshAdapt-%d.msh", ITER);
       writeMSH(name);
       // metric->exportInfo(name);
 
@@ -1447,7 +1447,7 @@ int GModel::adaptMesh(std::vector<int> technique,
       }
 
       char name[256];
-      sprintf(name, "meshAdapt-%d.msh", ITER);
+      snprintf(name, 256, "meshAdapt-%d.msh", ITER);
       writeMSH(name);
 
       nbElems = getNumMeshElements();

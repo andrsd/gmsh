@@ -73,7 +73,7 @@ public:
   void print4debug(const int debugTag)
   {
     char name[256];
-    sprintf(name, "polyMesh%d.pos", debugTag);
+    snprintf(name, 256, "polyMesh%d.pos", debugTag);
     FILE *f = fopen(name, "w");
     fprintf(f, "View \" %s \"{\n", name);
     for(auto it : faces) {

@@ -796,7 +796,7 @@ bool PViewDataGModel::combineTime(nameData &nd)
   else
     tmp = nd.name;
   char name[256];
-  sprintf(name, "%s_Combine", tmp.c_str());
+  snprintf(name, 256, "%s_Combine", tmp.c_str());
 
   setName(name);
   setFileName(std::string(name) + ".msh");

@@ -52,18 +52,18 @@ static void drawElementLabels(drawContext *ctx, GEntity *e,
       SPoint3 pc = ele->barycenter();
       char str[256];
       if(CTX::instance()->mesh.labelType == 4)
-        sprintf(str, "(%g,%g,%g)", pc.x(), pc.y(), pc.z());
+        snprintf(str, 256, "(%g,%g,%g)", pc.x(), pc.y(), pc.z());
       else if(CTX::instance()->mesh.labelType == 3)
-        sprintf(str, "%d", ele->getPartition());
+        snprintf(str, 256, "%d", ele->getPartition());
       else if(CTX::instance()->mesh.labelType == 2) {
         int np = e->physicals.size();
         int p = np ? e->physicals[np - 1] : 0;
-        sprintf(str, "%d", p);
+        snprintf(str, 256, "%d", p);
       }
       else if(CTX::instance()->mesh.labelType == 1)
-        sprintf(str, "%d", e->tag());
+        snprintf(str, 256, "%d", e->tag());
       else
-        sprintf(str, "%lu", ele->getNum());
+        snprintf(str, 256, "%lu", ele->getNum());
       ctx->drawString(str, pc.x(), pc.y(), pc.z());
     }
   }
@@ -110,19 +110,19 @@ static void drawVertexLabel(drawContext *ctx, GEntity *e, MVertex *v,
   int physical = np ? e->physicals[np - 1] : 0;
   char str[256];
   if(CTX::instance()->mesh.labelType == 4)
-    sprintf(str, "(%.16g,%.16g,%.16g)", v->x(), v->y(), v->z());
+    snprintf(str, 256, "(%.16g,%.16g,%.16g)", v->x(), v->y(), v->z());
   else if(CTX::instance()->mesh.labelType == 3) {
     if(partition < 0)
-      sprintf(str, "NA");
+      snprintf(str, 256, "NA");
     else
-      sprintf(str, "%d", partition);
+      snprintf(str, 256, "%d", partition);
   }
   else if(CTX::instance()->mesh.labelType == 2)
-    sprintf(str, "%d", physical);
+    snprintf(str, 256, "%d", physical);
   else if(CTX::instance()->mesh.labelType == 1)
-    sprintf(str, "%d", e->tag());
+    snprintf(str, 256, "%d", e->tag());
   else
-    sprintf(str, "%lu", v->getNum());
+    snprintf(str, 256, "%lu", v->getNum());
 
   if(CTX::instance()->mesh.colorCarousel == 0 ||
      CTX::instance()->mesh.volumeFaces ||

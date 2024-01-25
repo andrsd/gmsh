@@ -385,7 +385,7 @@ void pluginWindow::resetViewBrowser()
   if(PView::list.size()) {
     view_browser->activate();
     for(unsigned int i = 0; i < PView::list.size(); i++) {
-      sprintf(str, "View [%d]", i);
+      snprintf(str, 128, "View [%d]", i);
       view_browser->add(str);
     }
     for(int i = 0; i < view_browser->size(); i++) {

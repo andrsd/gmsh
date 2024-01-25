@@ -155,7 +155,7 @@ public:
       if(it_attrib->second.size() > 1) str += "{ ";
       for(std::size_t i = 0; i < it_attrib->second.size(); i++) {
         if(i) str += ", ";
-        sprintf(tmp, "%g", it_attrib->second[i]);
+        snprintf(tmp, 32, "%g", it_attrib->second[i]);
         str += tmp;
       }
       if(it_attrib->second.size() > 1) str += "}";

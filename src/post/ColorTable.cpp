@@ -1097,7 +1097,7 @@ void ColorTable_Print(GmshColorTable *ct, FILE *fp,
         Msg::Direct(tmp1);
       strcpy(tmp1, "");
     }
-    sprintf(tmp2, "{%d, %d, %d, %d}", r, g, b, a);
+    snprintf(tmp2, 1024, "{%d, %d, %d, %d}", r, g, b, a);
     strcat(tmp1, tmp2);
     if(i != ct->size - 1) strcat(tmp1, ", ");
   }

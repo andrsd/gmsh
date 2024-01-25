@@ -3882,7 +3882,7 @@ void optionWindow::showGroup(int num, bool showWindow,
   default: {
     updateViewGroup(num - 6);
     static char str[128];
-    sprintf(str, "Options - View [%d]", num - 6);
+    snprintf(str, 128, "Options - View [%d]", num - 6);
     win->label(str);
     view.group->show();
   } break;
@@ -3901,7 +3901,7 @@ void optionWindow::resetBrowser()
   browser->add("Post-pro");
   for(std::size_t i = 0; i < PView::list.size(); i++) {
     char str[128];
-    sprintf(str, "View [%lu]", i);
+    snprintf(str, 128, "View [%lu]", i);
     browser->add(str);
   }
   int num = (select <= browser->size()) ? select : browser->size();
@@ -3916,7 +3916,7 @@ void optionWindow::resetExternalViewList()
   view.choice[10]->add("Self");
   view.choice[11]->add("Self");
   for(std::size_t i = 0; i < PView::list.size(); i++) {
-    sprintf(str, "View [%lu]", i);
+    snprintf(str, 32, "View [%lu]", i);
     view.choice[10]->add(str, 0, nullptr);
     view.choice[11]->add(str, 0, nullptr);
   }

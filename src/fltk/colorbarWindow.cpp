@@ -268,7 +268,7 @@ void colorbarWindow::redraw_marker()
   fl_font(FL_HELVETICA, font_height);
   val =
     minval + (maxval - minval) * ((double)marker_pos / (double)(ct->size - 1));
-  sprintf(str, "%g", val);
+  snprintf(str, 50, "%g", val);
   fl_draw(str, 10, label_y);
 }
 

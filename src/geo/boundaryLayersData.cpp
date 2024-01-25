@@ -1034,7 +1034,7 @@ bool buildAdditionalPoints2D(GFace *gf)
 
 #if 0 // DEBUG STUFF
   char name[256];
-  sprintf(name, "points_face_%d.pos", gf->tag());
+  snprintf(name, 256, "points_face_%d.pos", gf->tag());
   FILE *f = Fopen(name,"w");
   if(f){
     fprintf(f,"View \"\" {\n");

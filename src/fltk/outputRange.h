@@ -141,13 +141,13 @@ public:
   void value(double val)
   {
     char buffer[256];
-    if(_number_format.empty()) { sprintf(buffer, "%g", val); }
+    if(_number_format.empty()) { snprintf(buffer, 256, "%g", val); }
     else {
       if(_number_format.find("d") != std::string::npos ||
          _number_format.find("u") != std::string::npos)
-        sprintf(buffer, _number_format.c_str(), (int)val);
+        snprintf(buffer, 256, _number_format.c_str(), (int)val);
       else
-        sprintf(buffer, _number_format.c_str(), val);
+        snprintf(buffer, 256, _number_format.c_str(), val);
     }
     _output->value(buffer);
   }

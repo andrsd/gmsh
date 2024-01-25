@@ -52,7 +52,7 @@ static int assembleColmapStr(const int num, const int intType, int &samples,
     if(a != 255)
       Msg::Warning("PGF export does not handle transparent colormaps");
 
-    sprintf(tmp, "rgb255=(%d,%d,%d) ", r, g, b);
+    snprintf(tmp, 256, "rgb255=(%d,%d,%d) ", r, g, b);
     ret.append(tmp);
 
     if(intType != 2) // sampled
@@ -64,7 +64,7 @@ static int assembleColmapStr(const int num, const int intType, int &samples,
   r = CTX::instance()->unpackRed(ct->table[ct->size - 1]);
   g = CTX::instance()->unpackGreen(ct->table[ct->size - 1]);
   b = CTX::instance()->unpackBlue(ct->table[ct->size - 1]);
-  sprintf(tmp, "rgb255=(%d,%d,%d) ", r, g, b);
+  snprintf(tmp, 256, "rgb255=(%d,%d,%d) ", r, g, b);
   ret.append(tmp);
   if(intType != 2) // sampled
     // reinsert, because then the end color is interpreted correctly
@@ -98,7 +98,7 @@ static int assembleColbarStr(const int num, const int intType,
              "%% adjust width of colorbar\n"
              "\t\t%%height=6cm,%% adjust height of colorbar,\n");
   if(intType != 2) { // sampled
-    sprintf(tmp, "\t\tsamples=%d,\n", samples + 1);
+    snprintf(tmp, 256, "\t\tsamples=%d,\n", samples + 1);
     ret.append(tmp);
   }
 
@@ -111,11 +111,11 @@ static int assembleColbarStr(const int num, const int intType,
     // see
     // http://tex.stackexchange.com/questions/23750/log-color-bar-meta-data-in-pgfplot
     if(horizontal)
-      sprintf(tmp, "\t\txticklabel={$10^{\\pgfmathparse{\\tick}"
-                   "\\pgfmathprintnumber\\pgfmathresult}$},\n");
+      snprintf(tmp, 256, "\t\txticklabel={$10^{\\pgfmathparse{\\tick}"
+                         "\\pgfmathprintnumber\\pgfmathresult}$},\n");
     else
-      sprintf(tmp, "\t\tyticklabel={$10^{\\pgfmathparse{\\tick}"
-                   "\\pgfmathprintnumber\\pgfmathresult}$},\n");
+      snprintf(tmp, 256, "\t\tyticklabel={$10^{\\pgfmathparse{\\tick}"
+                         "\\pgfmathprintnumber\\pgfmathresult}$},\n");
     ret.append(tmp);
   }
 
@@ -124,8 +124,9 @@ static int assembleColbarStr(const int num, const int intType,
     cbmin = log10(cbmin);
     cbmax = log10(cbmax);
   }
-  sprintf(
+  snprintf(
     tmp,
+    256,
     "\t  \\addplot[point meta min=%f,"
     "point meta max=%f, update limits=false, draw=none, colorbar source]\n\t"
     "coordinates{(1,1)};\n",
@@ -142,7 +143,7 @@ static int assemblePostAxis(const int num, const int intType, std::string &ret)
   post_var = PView::list[num]->getData()->getName();
 
   if(!post_var.empty()) {
-    sprintf(tmp, "\ttitle={%s},\n", post_var.c_str());
+    snprintf(tmp, 256, "\ttitle={%s},\n", post_var.c_str());
     ret.assign(tmp);
   }
   ret.append("\tcolorbar,\n\tcolormap name=gmshcolormap,\n");
@@ -355,11 +356,12 @@ static int assemble2d(const int num, const int exportAxis, std::string &axisstr,
     }
     if(factor != 1) {
       char tmp[265];
-      sprintf(tmp,
-              "The pgf output has been rescaled in order to please "
-              "the TeX number precision/range. Rescaling your results by "
-              "a factor %g",
-              factor);
+      snprintf(tmp,
+               256,
+               "The pgf output has been rescaled in order to please "
+               "the TeX number precision/range. Rescaling your results by "
+               "a factor %g",
+               factor);
       Msg::Warning(tmp);
       // sprintf(tmp, "$\\times 10^{%d}$},",(int)(log10(factor)+0.5));
       // std::string repl = tmp;
@@ -387,8 +389,8 @@ static int assemble2d(const int num, const int exportAxis, std::string &axisstr,
     axisstr.append("\thide axis,\n");
   }
   char tmp[265];
-  sprintf(tmp, "\t  \\addplot graphics[xmin=%f, xmax=%f, ymin=%f, ymax=%f]\n",
-          xmin * factor, xmax * factor, ymin * factor, ymax * factor);
+  snprintf(tmp, 256, "\t  \\addplot graphics[xmin=%f, xmax=%f, ymin=%f, ymax=%f]\n",
+           xmin * factor, xmax * factor, ymin * factor, ymax * factor);
 
   plotstr.assign(tmp);
 
@@ -503,11 +505,12 @@ static int assemble3d(const int num, const int exportAxis, std::string &axisstr,
   }
   if(factor != 1) {
     char tmp[265];
-    sprintf(tmp,
-            "The pgf output has been rescaled in order to please "
-            "the TeX number precision/range. Rescaling your results by "
-            "a factor %g",
-            factor);
+    snprintf(tmp,
+             256,
+             "The pgf output has been rescaled in order to please "
+             "the TeX number precision/range. Rescaling your results by "
+             "a factor %g",
+             factor);
     Msg::Warning(tmp);
     // replace three labels
     if(exportAxis) {
@@ -542,21 +545,21 @@ static int assemble3d(const int num, const int exportAxis, std::string &axisstr,
   unsigned int j = 0;
   for(auto it = acceptableAnchors.begin();
       it != acceptableAnchors.end(); ++it, j++) {
-    sprintf(tmp, "\t    (%f,%f,%f)", factor * axPts[*it][0],
-            factor * axPts[*it][1], factor * axPts[*it][2]);
+    snprintf(tmp, 256, "\t    (%f,%f,%f)", factor * axPts[*it][0],
+             factor * axPts[*it][1], factor * axPts[*it][2]);
     plotstr.append(tmp);
     if(j > 3) {
       plotstr.append("%%");
     }
     // ypix-y syntax for easier debugging w/ e.g. gimp pixel
-    sprintf(tmp, " => (%d, %d-%d)\n", (int)(axViewPt[*it][0] + 0.5), ypix,
-            ypix - (int)(axViewPt[*it][1] + 0.5));
+    snprintf(tmp, 256, " => (%d, %d-%d)\n", (int)(axViewPt[*it][0] + 0.5), ypix,
+             ypix - (int)(axViewPt[*it][1] + 0.5));
     plotstr.append(tmp);
   }
   for(auto it = masked.begin(); it != masked.end();
       ++it) {
-    sprintf(tmp, "\t    (%f,%f,%f)", factor * axPts[*it][0],
-            factor * axPts[*it][1], factor * axPts[*it][2]);
+    snprintf(tmp, 256, "\t    (%f,%f,%f)", factor * axPts[*it][0],
+             factor * axPts[*it][1], factor * axPts[*it][2]);
     plotstr.append(tmp);
     plotstr.append(" %% out of pixel range, discarded\n");
   }
@@ -629,7 +632,7 @@ int print_pgf(const std::string &name, const int num, const int cnt,
     }
   }
   char tmp[265];
-  sprintf(tmp, "\t    {%s.png};\n", base.c_str());
+  snprintf(tmp, 256, "\t    {%s.png};\n", base.c_str());
   plot_s.append(tmp);
 
   fp = Fopen(pgffilen.c_str(), "wb");
@@ -651,7 +654,7 @@ int print_pgf(const std::string &name, const int num, const int cnt,
     if(system(nullptr)) {
       std::string pngname = name;
       pngname.replace(pngname.end() - 3, pngname.end(), "png");
-      sprintf(tmp, "convert -trim %s %s", pngname.c_str(), pngname.c_str());
+      snprintf(tmp, 2048, "convert -trim %s %s", pngname.c_str(), pngname.c_str());
       Msg::Info("Running:");
       Msg::Info(tmp);
       int ret = system(tmp);
@@ -660,21 +663,23 @@ int print_pgf(const std::string &name, const int num, const int cnt,
         Msg::Info("Automatic trim successful.");
       else {
         Msg::Warning("Cannot automatically trim output png.");
-        sprintf(tmp,
-                "One should now manually crop the margins, using e.g."
-                "gimp or `convert -trim %s %s` to get rid of any remaining"
-                "margins.",
-                pngfilen.c_str(), pngfilen.c_str());
+        snprintf(tmp,
+                 2048,
+                 "One should now manually crop the margins, using e.g."
+                 "gimp or `convert -trim %s %s` to get rid of any remaining"
+                 "margins.",
+                 pngfilen.c_str(), pngfilen.c_str());
         Msg::Warning(tmp);
       }
     }
     else {
       Msg::Warning("Cannot automatically trim output png.");
-      sprintf(tmp,
-              "One should now manually crop the margins, using e.g."
-              "gimp or `convert -trim %s %s` to get rid of any remaining"
-              "margins.",
-              pngfilen.c_str(), pngfilen.c_str());
+      snprintf(tmp,
+               2048,
+               "One should now manually crop the margins, using e.g."
+               "gimp or `convert -trim %s %s` to get rid of any remaining"
+               "margins.",
+               pngfilen.c_str(), pngfilen.c_str());
       Msg::Warning(tmp);
     }
   }
@@ -686,8 +691,8 @@ int print_pgf(const std::string &name, const int num, const int cnt,
     if(system(nullptr)) {
       std::string pngname = name;
       pngname.replace(pngname.end() - 3, pngname.end(), "png");
-      sprintf(tmp, "convert -transparent white %s %s", pngname.c_str(),
-              pngname.c_str());
+      snprintf(tmp, 2048, "convert -transparent white %s %s", pngname.c_str(),
+               pngname.c_str());
       Msg::Info("Running:");
       Msg::Info(tmp);
       int ret = system(tmp);
@@ -696,21 +701,23 @@ int print_pgf(const std::string &name, const int num, const int cnt,
         Msg::Info("Automatic transparent white background successful.");
       else {
         Msg::Warning("Cannot automatically add transparency to png.");
-        sprintf(tmp,
-                "One should now manually add a transparent layer in "
-                "order to not obstruct the axis. e.g. using gimp or "
-                "convert -transparent white %s %s`.",
-                pngfilen.c_str(), pngfilen.c_str());
+        snprintf(tmp,
+                 2048,
+                 "One should now manually add a transparent layer in "
+                 "order to not obstruct the axis. e.g. using gimp or "
+                 "convert -transparent white %s %s`.",
+                 pngfilen.c_str(), pngfilen.c_str());
         Msg::Warning(tmp);
       }
     }
     else { // exit (EXIT_FAILURE);
       Msg::Warning("Cannot automatically add transparency to output png.");
-      sprintf(tmp,
-              "One should now manually add a transparent layer in "
-              "order to not obstruct the axis. e.g. using gimp or "
-              "`convert -transparent white %s %s`.",
-              pngfilen.c_str(), pngfilen.c_str());
+      snprintf(tmp,
+               2048,
+               "One should now manually add a transparent layer in "
+               "order to not obstruct the axis. e.g. using gimp or "
+               "`convert -transparent white %s %s`.",
+               pngfilen.c_str(), pngfilen.c_str());
       Msg::Warning(tmp);
     }
   }

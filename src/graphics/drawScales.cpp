@@ -98,7 +98,7 @@ static void drawScaleValues(drawContext *ctx, PView *p, double xmin,
     drawContext::global()->getStringDescent(); // height above ref pt
 
   char label[1024];
-  sprintf(label, opt->format.c_str(), -M_PI * 1.e-4);
+  snprintf(label, 1024, opt->format.c_str(), -M_PI * 1.e-4);
   double maxw = drawContext::global()->getStringWidth(label);
 
   int nbv = opt->nbIso;
@@ -131,7 +131,7 @@ static void drawScaleValues(drawContext *ctx, PView *p, double xmin,
      opt->intervalsType == PViewOptions::Continuous) {
     for(int i = 0; i < nbv + 1; i++) {
       double v = opt->getScaleValue(i, nbv + 1, opt->tmpMin, opt->tmpMax);
-      sprintf(label, opt->format.c_str(), v);
+      snprintf(label, 1024, opt->format.c_str(), v);
       if(horizontal) {
         ctx->drawStringCenter(label, xmin + i * vbox, ymin + height + tic, 0.);
       }
@@ -148,7 +148,7 @@ static void drawScaleValues(drawContext *ctx, PView *p, double xmin,
     }
     for(int i = 0; i < nbv; i++) {
       double v = opt->getScaleValue(i, nbv, opt->tmpMin, opt->tmpMax);
-      sprintf(label, opt->format.c_str(), v);
+      snprintf(label, 1024, opt->format.c_str(), v);
       if(horizontal) {
         ctx->drawStringCenter(label, xmin + box / 2. + i * vbox,
                               ymin + height + tic, 0.);
@@ -185,7 +185,7 @@ static void drawScaleLabel(drawContext *ctx, PView *p, double xmin, double ymin,
   int n0 = data->getFirstNonEmptyTimeStep();
   int n = (nt - n0 > 0) ? nt - n0 : 1;
   char time[256];
-  sprintf(time, opt->format.c_str(), data->getTime(opt->timeStep));
+  snprintf(time,256,  opt->format.c_str(), data->getTime(opt->timeStep));
   int choice = opt->showTime;
   if(choice == 3) { // automatic
     if(n == 1)
@@ -197,34 +197,34 @@ static void drawScaleLabel(drawContext *ctx, PView *p, double xmin, double ymin,
   }
   switch(choice) {
   case 1: // time series
-    sprintf(label, "%s - time %s", data->getName().c_str(), time);
+    snprintf(label, 1024, "%s - time %s", data->getName().c_str(), time);
     break;
   case 2: // harmonic data
     if(n <= 2)
-      sprintf(label, "%s - %s part", data->getName().c_str(),
-              ((opt->timeStep - n0) % 2) ? "imaginary" : "real");
+      snprintf(label, 1024, "%s - %s part", data->getName().c_str(),
+               ((opt->timeStep - n0) % 2) ? "imaginary" : "real");
     else
-      sprintf(label, "%s - harmonic %s (%s part)", data->getName().c_str(),
-              time, ((opt->timeStep - n0) % 2) ? "imaginary" : "real");
+      snprintf(label, 1024, "%s - harmonic %s (%s part)", data->getName().c_str(),
+               time, ((opt->timeStep - n0) % 2) ? "imaginary" : "real");
     break;
   case 3: // automatic
     // never here
     break;
   case 4: // step data
-    sprintf(label, "%s - step %d", data->getName().c_str(), opt->timeStep);
+    snprintf(label, 1024, "%s - step %d", data->getName().c_str(), opt->timeStep);
     break;
   case 5: // multi-step data
-    sprintf(label, "%s - step %d in [0,%d]", data->getName().c_str(),
-            opt->timeStep, data->getNumTimeSteps() - 1);
+    snprintf(label, 1024, "%s - step %d in [0,%d]", data->getName().c_str(),
+             opt->timeStep, data->getNumTimeSteps() - 1);
     break;
   case 6: // real eigenvalues
-    sprintf(label, "%s - eigenvalue %s", data->getName().c_str(), time);
+    snprintf(label, 1024, "%s - eigenvalue %s", data->getName().c_str(), time);
     break;
   case 7: // complex eigenvalues
-    sprintf(label, "%s - eigenvalue %s (%s part)", data->getName().c_str(),
-            time, ((opt->timeStep - n0) % 2) ? "imaginary" : "real");
+    snprintf(label, 1024, "%s - eigenvalue %s (%s part)", data->getName().c_str(),
+             time, ((opt->timeStep - n0) % 2) ? "imaginary" : "real");
     break;
-  default: sprintf(label, "%s", data->getName().c_str()); break;
+  default: snprintf(label, 1024, "%s", data->getName().c_str()); break;
   }
 
   if(horizontal) {
@@ -288,7 +288,7 @@ void drawContext::drawScales()
   double maxw = 0.;
   for(std::size_t i = 0; i < scales.size(); i++) {
     PViewOptions *opt = scales[i]->getOptions();
-    sprintf(label, opt->format.c_str(), -M_PI * 1.e-4);
+    snprintf(label, 1024, opt->format.c_str(), -M_PI * 1.e-4);
     maxw = std::max(maxw, drawContext::global()->getStringWidth(label));
   }
 
@@ -350,15 +350,15 @@ void drawContext::drawScales()
       }
       // compute width
       width_prev = width;
-      sprintf(label, opt->format.c_str(), -M_PI * 1.e-4);
+      snprintf(label, 1204, opt->format.c_str(), -M_PI * 1.e-4);
       width = bar_size + tic + drawContext::global()->getStringWidth(label);
       if(opt->showTime) {
         char tmp[256];
-        sprintf(tmp, opt->format.c_str(), data->getTime(opt->timeStep));
-        sprintf(label, "%s (%s)", data->getName().c_str(), tmp);
+        snprintf(tmp, 256, opt->format.c_str(), data->getTime(opt->timeStep));
+        snprintf(label, 1024, "%s (%s)", data->getName().c_str(), tmp);
       }
       else
-        sprintf(label, "%s", data->getName().c_str());
+        snprintf(label, 1024, "%s", data->getName().c_str());
       width = std::max(width, drawContext::global()->getStringWidth(label));
       if(i % 2)
         width_total += std::max(bar_size + width, bar_size + width_prev);

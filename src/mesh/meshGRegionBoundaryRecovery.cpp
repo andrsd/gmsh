@@ -146,8 +146,8 @@ namespace tetgenBR {
     splitQuadRecovery *_sqr = ((brdata *)p)->sqr;
 
     char opts[128];
-    sprintf(opts, "YpeQT%gp/%g", CTX::instance()->mesh.toleranceInitialDelaunay,
-            CTX::instance()->mesh.angleToleranceFacetOverlap);
+    snprintf(opts, 128, "YpeQT%gp/%g", CTX::instance()->mesh.toleranceInitialDelaunay,
+             CTX::instance()->mesh.angleToleranceFacetOverlap);
     b->parse_commandline(opts);
 
     double t_start = Cpu(), w_start = TimeOfDay();

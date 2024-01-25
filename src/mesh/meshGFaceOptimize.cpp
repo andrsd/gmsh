@@ -1168,7 +1168,7 @@ static void _recombineIntoQuads(GFace *gf, bool blossom, bool cubicGraph = 1)
 
       double matzeit = 0.0;
       char MATCHFILE[256];
-      sprintf(MATCHFILE, ".face.match");
+      snprintf(MATCHFILE, 256, ".face.match");
       if(perfect_match(ncount, nullptr, ecount, &elist, &elen, nullptr,
                        MATCHFILE, 0, 0, 0, 0, &matzeit)) {
         Msg::Error(
@@ -1368,7 +1368,7 @@ void recombineIntoQuads(GFace *gf, bool blossom, int topologicalOptiPasses,
   double t2 = Cpu(), w2 = TimeOfDay();
 
   char name[256];
-  sprintf(name, "%s recombination completed (Wall %gs, CPU %gs)",
+  snprintf(name, 256, "%s recombination completed (Wall %gs, CPU %gs)",
           blossom ? "Blossom" : "Simple", w2 - w1, t2 - t1);
   printStats(gf, name);
 
