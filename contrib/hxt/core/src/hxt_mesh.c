@@ -334,7 +334,7 @@ HXTStatus  hxtMeshWriteGmsh  ( HXTMesh* mesh , const char *filename) {
     
     uint64_t index = 0;
     for (i=0; i<mesh->points.num; i++){
-      fprintf(file,"%lu %u 2 0 %u %u\n", ++index,POINTID,
+      fprintf(file,"%llu %u 2 0 %u %u\n", ++index,POINTID,
               mesh->points.node[i]+1,
               mesh->points.node[i]+1);
     }
